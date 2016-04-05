@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/compiled/main.css">
+</head>
+<body>
+<header class="page-header">
+    <h1 class="appTitle">
+        Weather App
+    </h1>
+</header>
+
+<main>
+    <section class="leftSide">
+        <header>
+            <h3 class="sectionTitle">
+                Cities
+            </h3>
+        </header>
+        <ul class="cities" data-bind="foreach: cities">
+            <li class="citiesItem"
+                data-bind="text: name, click: $parent.changeCurrentCity, css: { currentCity: name == $root.currentCity().name }">
+
+            </li>
+        </ul>
+        <div class="input-group">
+            <input type="text" data-bind="value: newCity, event: {blur: addCity}" class="form-control"
+                   placeholder="City">
+            <span class="input-group-btn">
+                <button data-bind="click: addCity" class="btn btn-default" type="button">Add city</button>
+            </span>
+        </div>
+
+    </section>
+    <section class="rightSide" data-bind="with: currentCity">
+        <header>
+            <h3 class="sectionTitle">
+                Details
+            </h3>
+        </header>
+
+        <!-- ko if: weather -->
+        <!-- ko with: weather -->
+        <!-- ko if: cod!=="404" -->
+        <div class="weatherBlock">
+            <div class="mainWeather">
+                <img data-bind="attr: { 'src': 'http://openweathermap.org/img/w/'+ weather[0].icon +'.png' }" src=""/>
+                <span class="temperature" data-bind="text: Math.round(main.temp)">
+
+                </span>
+                <span class="temperatureLabel">
+                    &degC
+                </span>
+            </div>
+            <div class="extraWeather">
+                <span data-bind="text: 'Pressure: ' + Math.round(main.pressure) + ' hPa'">
+
+                </span>
+                <span data-bind="text: 'Humidity: ' + Math.round(main.humidity) + ' %'">
+
+                </span>
+                <span data-bind="text: 'Wind: ' + Math.round(wind.speed) + ' m/s'">
+
+                </span>
+            </div>
+        </div>
+        <!-- /ko --> <!-- if: cod!=="404" -->
+
+        <!-- ko if: cod==="404" -->
+        <span>
+            Oops! We can't get weather in this city.
+        </span>
+        <!-- /ko --> <!-- if: cod==="404" end -->
+
+        <!-- /ko --> <!-- with: weather end -->
+        <!-- /ko --> <!-- if: weather end -->
+
+    </section>
+</main>
+<script src="js/compiled/build.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+@import "variable";
+
+.page-header {
+  margin-bottom: 0;
+  .appTitle {
+    margin-left: 5%;
+  }
+}
+
+main {
+  display: flex;
+  margin: 0 5%;
+  height: 100%;
+
+  section {
+    min-width: 200px;
+    padding-bottom: 24px;
+  }
+
+  .leftSide {
+    width: 50%;
+    border-right: 1px solid $borderCol;
+    padding-right: 24px;
+
+    .cities {
+      padding: 0;
+
+      .citiesItem {
+        list-style: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .rightSide {
+    width: 50%;
+    padding-left: 24px;
+
+    .weatherBlock {
+      display: flex;
+      justify-content: center;
+
+      .mainWeather, .extraWeather {
+        padding: 16px;
+      }
+
+      .mainWeather {
+        display: flex;
+        align-items: center;
+
+        .temperature {
+          padding-left: 8px;
+          font-size: 2em;
+        }
+
+        .temperatureLabel {
+          position: relative;
+          top: -0.5em;
+        }
+      }
+
+      .extraWeather {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .sectionTitle {
+    text-align: center;
+  }
+}
+
+.currentCity {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    flex-direction: column;
+
+    .leftSide, .rightSide {
+      width: 100%;
+      padding: 0;
+    }
+
+    .leftSide {
+      border-right: none;
+    }
+  }
+}
