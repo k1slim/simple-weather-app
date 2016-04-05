@@ -15,7 +15,7 @@ const initialCities = [
 
 const WeatherModel = function(initialCities) {
     const self = this;
-    
+
     self.cities = ko.observableArray(initialCities.map(item => new CityModel(item)));
     self.newCity = ko.observable('');
     self.currentCity = ko.observable('');
@@ -33,7 +33,16 @@ const WeatherModel = function(initialCities) {
 
     self.changeCurrentCity = function(city) {
         self.currentCity(city);
-        self.currentCity().getDetail();
+        if(self.currentCity()) {
+            self.currentCity().getDetail();
+        }
+    };
+
+    self.removeCity = function(city) {
+        self.cities.remove(city);
+        if (self.currentCity().name === city.name) {
+            self.changeCurrentCity(self.cities()[0]);
+        }
     };
 
     self.changeCurrentCity(new CityModel(initialCities[0]));

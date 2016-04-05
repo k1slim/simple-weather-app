@@ -21,9 +21,12 @@
             </h3>
         </header>
         <ul class="cities" data-bind="foreach: cities">
-            <li class="citiesItem"
-                data-bind="text: name, click: $parent.changeCurrentCity, css: { currentCity: name == $root.currentCity().name }">
-
+            <li class="citiesItem">
+                <span data-bind="click: $parent.removeCity">
+                    X
+                </span>
+                <span data-bind="text: name, click: $parent.changeCurrentCity, css: { currentCity: name == $parent.currentCity().name }">
+                </span>
             </li>
         </ul>
         <div class="input-group">
